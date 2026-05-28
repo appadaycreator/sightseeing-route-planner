@@ -1,8 +1,9 @@
 {
   "name": "Sightseeing Route Planner",
   "short_name": "sightseeing-",
-  "start_url": "/",
+  "start_url": "/sightseeing-route-planner/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#6366f1"
+  "theme_color": "#6366f1",
+  "scope": "/sightseeing-route-planner/"
 }
