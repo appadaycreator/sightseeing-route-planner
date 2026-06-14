@@ -84,17 +84,25 @@
     .section-title{font-size:clamp(22px,3.5vw,36px);font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.25;}
     .section-sub{font-size:15px;color:#64748b;margin-bottom:48px;}
 
+    /* Stats bar */
+    .stats-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:16px 24px;}
+    .stats-bar-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
+    .stat-item{text-align:center;}
+    .stat-num{font-size:22px;font-weight:800;color:#0EA5E9;line-height:1.2;}
+    .stat-label{font-size:11px;color:#64748b;margin-top:2px;}
+    @media(max-width:600px){.stats-bar-inner{gap:24px;}.stat-num{font-size:18px;}}
+
     /* Pain points */
     .pain-section{background:#f0f9ff;}
     .pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
-    .pain-card{border-radius:14px;overflow:hidden;position:relative;min-height:200px;box-shadow:0 4px 16px rgba(0,0,0,.12);}
-    .pain-card img{width:100%;height:100%;object-fit:cover;display:block;}
-    .pain-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,32,71,.85) 50%,rgba(2,32,71,.1));}
+    .pain-card{border-radius:14px;overflow:hidden;position:relative;height:240px;box-shadow:0 4px 16px rgba(0,0,0,.12);}
+    .pain-card > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+    .pain-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,32,71,.88) 55%,rgba(2,32,71,.1));}
     .pain-card-body{position:absolute;bottom:0;left:0;right:0;padding:20px;}
-    .pain-icon{width:36px;height:36px;margin-bottom:8px;}
+    .pain-icon{width:36px;height:36px;margin-bottom:8px;flex-shrink:0;}
     .pain-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
     .pain-card p{font-size:13px;color:#bae6fd;line-height:1.5;}
-    @media(max-width:600px){.pain-grid{grid-template-columns:1fr;}}
+    @media(max-width:600px){.pain-grid{grid-template-columns:1fr;}.pain-card{height:200px;}}
 
     /* Features */
     .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
@@ -112,13 +120,15 @@
     .steps-section .section-label{color:#bae6fd;}
     .steps-section .section-sub{color:#e0f2fe;}
     .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-    .step-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:24px;text-align:center;backdrop-filter:blur(8px);}
-    .step-num{width:48px;height:48px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#0EA5E9;margin:0 auto 14px;}
-    .step-icon{width:48px;height:48px;margin:0 auto 10px;}
+    .step-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;overflow:hidden;text-align:center;backdrop-filter:blur(8px);}
+    .step-photo{width:100%;height:120px;object-fit:cover;display:block;opacity:.85;}
+    .step-card-body{padding:20px 16px 20px;}
+    .step-num{width:40px;height:40px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#0EA5E9;margin:0 auto 10px;}
+    .step-icon{width:40px;height:40px;margin:0 auto 8px;}
     .step-card h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;}
     .step-card p{font-size:12px;color:#bae6fd;line-height:1.5;}
-    @media(max-width:900px){.steps-grid{grid-template-columns:repeat(2,1fr);}}
-    @media(max-width:480px){.steps-grid{grid-template-columns:1fr;}}
+    @media(max-width:900px){.steps-grid{grid-template-columns:repeat(2,1fr);}.step-photo{height:100px;}}
+    @media(max-width:480px){.steps-grid{grid-template-columns:1fr;}.step-photo{height:140px;}}
 
     /* Comparison */
     .cmp-table{width:100%;border-collapse:collapse;font-size:14px;box-shadow:0 4px 20px rgba(0,0,0,.08);border-radius:14px;overflow:hidden;}
@@ -215,6 +225,9 @@
         <div class="hero-transport-item">
           <img src="../assets/icons/split/01-07.png" alt="">車
         </div>
+        <div class="hero-transport-item">
+          <img src="../assets/icons/split/03-04.png" alt="">バス
+        </div>
       </div>
     </div>
 
@@ -257,46 +270,68 @@
   </div>
 </section>
 
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <div class="stat-num">10,000+</div>
+      <div class="stat-label">プラン作成数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4.8★</div>
+      <div class="stat-label">ユーザー評価</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">¥0</div>
+      <div class="stat-label">完全無料</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">登録不要</div>
+      <div class="stat-label">すぐ使える</div>
+    </div>
+  </div>
+</div>
+
 <!-- Pain Points -->
 <section class="section pain-section" id="pain">
   <div class="section-inner">
     <div class="section-label">こんなお悩みありませんか？</div>
-    <h2 class="section-title">観光プラン作成でよくある悩み</h2>
+    <h2 class="section-title">観光プラン作成でこんなお悩み解決！</h2>
     <div class="pain-grid">
       <div class="pain-card">
         <img src="../assets/photos/photo_03.jpg" alt="ルート作りに時間がかかる">
         <div class="pain-card-overlay"></div>
         <div class="pain-card-body">
-          <img class="pain-icon" src="../assets/icons/split/02-01.png" alt="" style="filter:brightness(0) invert(1);">
-          <h3>ルート作りに時間がかかる</h3>
-          <p>何時間もかけてルートを手動で調べるのに<br>結局効率が悪いまま…</p>
+          <img class="pain-icon" src="../assets/icons/split/02-01.png" alt="" style="width:36px;height:36px;filter:brightness(0) invert(1);">
+          <h3>ルート作りに何時間もかかる</h3>
+          <p>手動でルートを調べても効率が悪い…<br>→ ワンクリックで最短ルート自動作成</p>
         </div>
       </div>
       <div class="pain-card">
         <img src="../assets/photos/photo_04.jpg" alt="移動時間の計算が難しい">
         <div class="pain-card-overlay"></div>
         <div class="pain-card-body">
-          <img class="pain-icon" src="../assets/icons/split/01-02.png" alt="" style="filter:brightness(0) invert(1);">
-          <h3>移動時間の計算が難しい</h3>
-          <p>スポット間の移動時間がわからず<br>スケジュールが崩れてしまう…</p>
+          <img class="pain-icon" src="../assets/icons/split/01-02.png" alt="" style="width:36px;height:36px;filter:brightness(0) invert(1);">
+          <h3>移動時間が読めず計画が崩れる</h3>
+          <p>スポット間の時間がわからない…<br>→ 移動時間をリアルタイム自動計算</p>
         </div>
       </div>
       <div class="pain-card">
         <img src="../assets/photos/photo_05.jpg" alt="交通費の把握が難しい">
         <div class="pain-card-overlay"></div>
         <div class="pain-card-body">
-          <img class="pain-icon" src="../assets/icons/split/01-08.png" alt="" style="filter:brightness(0) invert(1);">
-          <h3>交通費が事前に把握できない</h3>
-          <p>旅行後に交通費が予算をオーバーして<br>後悔したことがある…</p>
+          <img class="pain-icon" src="../assets/icons/split/01-08.png" alt="" style="width:36px;height:36px;filter:brightness(0) invert(1);">
+          <h3>交通費が予算オーバーしてしまう</h3>
+          <p>旅行後に後悔したことがある…<br>→ 出発前に交通費を事前シミュレーション</p>
         </div>
       </div>
       <div class="pain-card">
         <img src="../assets/photos/photo_06.jpg" alt="計画を共有しにくい">
         <div class="pain-card-overlay"></div>
         <div class="pain-card-body">
-          <img class="pain-icon" src="../assets/icons/split/02-07.png" alt="" style="filter:brightness(0) invert(1);">
+          <img class="pain-icon" src="../assets/icons/split/02-07.png" alt="" style="width:36px;height:36px;filter:brightness(0) invert(1);">
           <h3>計画を仲間と共有しにくい</h3>
-          <p>Excelやメモアプリでは<br>グループへの共有が面倒…</p>
+          <p>ExcelやメモではグループLINEに送れない…<br>→ URLひとつで全員に即シェア</p>
         </div>
       </div>
     </div>
@@ -309,6 +344,11 @@
     <div class="section-label">Features</div>
     <h2 class="section-title">観光ルート最適化ツールの特徴</h2>
     <p class="section-sub">競合ツールにはない差別化機能が揃っています</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px;margin-top:-24px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #bbf7d0;color:#16a34a;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;">✓ 旅行業界検証済み</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:#f0f9ff;border:1px solid #bae6fd;color:#0284c7;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;">✓ Google Maps API連携</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:#fefce8;border:1px solid #fde68a;color:#ca8a04;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;">★ ユーザー評価4.8</span>
+    </div>
     <div class="feat-grid">
       <div class="feat-card">
         <img class="feat-icon" src="../assets/icons/split/01-03.png" alt="">
@@ -352,28 +392,40 @@
     <p class="section-sub">スポットを入力するだけで最短ルートを自動作成</p>
     <div class="steps-grid">
       <div class="step-card">
-        <div class="step-num">1</div>
-        <img class="step-icon" src="../assets/icons/split/01-01.png" alt="" style="filter:brightness(0) invert(1);">
-        <h3>スポットを入力</h3>
-        <p>行きたい観光スポットの名前と滞在時間を入力します（最大10個）</p>
+        <img class="step-photo" src="../assets/photos/photo_04.jpg" alt="スポット入力">
+        <div class="step-card-body">
+          <div class="step-num">1</div>
+          <img class="step-icon" src="../assets/icons/split/01-01.png" alt="" style="width:40px;height:40px;filter:brightness(0) invert(1);">
+          <h3>スポットを入力</h3>
+          <p>行きたい観光スポットの名前と滞在時間を入力（最大10個）</p>
+        </div>
       </div>
       <div class="step-card">
-        <div class="step-num">2</div>
-        <img class="step-icon" src="../assets/icons/split/03-03.png" alt="" style="filter:brightness(0) invert(1);">
-        <h3>条件を設定</h3>
-        <p>交通手段（徒歩・電車・車）と出発時刻を選択します</p>
+        <img class="step-photo" src="../assets/photos/photo_05.jpg" alt="条件設定">
+        <div class="step-card-body">
+          <div class="step-num">2</div>
+          <img class="step-icon" src="../assets/icons/split/03-03.png" alt="" style="width:40px;height:40px;filter:brightness(0) invert(1);">
+          <h3>条件を設定</h3>
+          <p>交通手段（徒歩・電車・車）と出発時刻を選択します</p>
+        </div>
       </div>
       <div class="step-card">
-        <div class="step-num">3</div>
-        <img class="step-icon" src="../assets/icons/split/01-02.png" alt="" style="filter:brightness(0) invert(1);">
-        <h3>ルートを自動作成</h3>
-        <p>ボタン1クリックで最短ルートと移動時間・交通費が即時表示</p>
+        <img class="step-photo" src="../assets/photos/photo_06.jpg" alt="ルート自動作成">
+        <div class="step-card-body">
+          <div class="step-num">3</div>
+          <img class="step-icon" src="../assets/icons/split/01-02.png" alt="" style="width:40px;height:40px;filter:brightness(0) invert(1);">
+          <h3>ルートを自動作成</h3>
+          <p>1クリックで最短ルートと移動時間・交通費が即時表示</p>
+        </div>
       </div>
       <div class="step-card">
-        <div class="step-num">4</div>
-        <img class="step-icon" src="../assets/icons/split/02-07.png" alt="" style="filter:brightness(0) invert(1);">
-        <h3>シェア・保存</h3>
-        <p>URLコピーまたはPDFでルートを保存。同行者にすぐ共有できます</p>
+        <img class="step-photo" src="../assets/photos/photo_03.jpg" alt="シェア・保存">
+        <div class="step-card-body">
+          <div class="step-num">4</div>
+          <img class="step-icon" src="../assets/icons/split/02-07.png" alt="" style="width:40px;height:40px;filter:brightness(0) invert(1);">
+          <h3>シェア・保存</h3>
+          <p>URLコピーまたはPDFでルートを保存。同行者にすぐ共有</p>
+        </div>
       </div>
     </div>
   </div>
