@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>観光スポットの最短ルートを無料自動作成｜移動時間・交通費も計算</title>
+  <meta name="description" content="観光スポットを入力するだけで最短ルートを無料自動作成。移動時間・交通費・徒歩/電車/車の切り替え対応。登録不要で即使える旅行プランニングツール。">
+  <link rel="canonical" href="https://appadaycreator.com/sightseeing-route-planner/lp/">
+  <meta property="og:title" content="観光スポットの最短ルートを無料自動作成｜移動時間・交通費も計算">
+  <meta property="og:description" content="観光スポットを入力するだけで最短ルートを無料自動作成。移動時間・交通費計算付き。登録不要・完全無料。">
+  <meta property="og:url" content="https://appadaycreator.com/sightseeing-route-planner/lp/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://appadaycreator.com/assets/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗾</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});</script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDPNYD2875"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDPNYD2875');</script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter','Noto Sans JP',sans-serif;color:#1e293b;line-height:1.6;}
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;height:auto;}
+
+    /* Header */
+    .lp-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e2e8f0;padding:0 24px;}
+    .lp-header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px;}
+    .lp-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#0EA5E9;white-space:nowrap;}
+    .lp-logo img{width:28px;height:28px;}
+    .lp-nav{display:flex;align-items:center;gap:24px;}
+    .lp-nav a{font-size:13px;font-weight:500;color:#475569;transition:color .2s;}
+    .lp-nav a:hover{color:#0EA5E9;}
+    .lp-cta-btn{background:#F97316;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap;transition:opacity .2s;}
+    .lp-cta-btn:hover{opacity:.9;}
+    @media(max-width:768px){.lp-nav{display:none;}.lp-logo span{display:none;}}
+
+    /* Hero */
+    .hero{position:relative;min-height:580px;display:flex;align-items:center;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background-image:url('../assets/photos/photo_01.jpg');background-size:cover;background-position:center;}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(2,32,71,.82) 55%,rgba(2,32,71,.45) 100%);}
+    .hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:60px 24px;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;width:100%;}
+    .hero-text .sub{font-size:15px;color:#bae6fd;font-weight:500;margin-bottom:8px;}
+    .hero-text h1{font-size:clamp(36px,5vw,60px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px;letter-spacing:-0.02em;}
+    .hero-text .desc{font-size:17px;color:#e0f2fe;margin-bottom:24px;}
+    .hero-badges{display:flex;gap:10px;margin-bottom:28px;}
+    .badge-free{background:#10B981;color:#fff;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700;}
+    .badge-noreg{background:#0EA5E9;color:#fff;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700;}
+    .hero-cta{display:inline-flex;align-items:center;gap:10px;background:#F97316;color:#fff;padding:16px 32px;border-radius:12px;font-size:18px;font-weight:800;margin-bottom:20px;transition:transform .2s,opacity .2s;box-shadow:0 4px 16px rgba(249,115,22,.4);}
+    .hero-cta:hover{transform:translateY(-2px);opacity:.95;}
+    .hero-transports{display:flex;gap:20px;color:#e0f2fe;font-size:14px;}
+    .hero-transport-item{display:flex;align-items:center;gap:6px;}
+    .hero-transport-item img{width:22px;height:22px;filter:brightness(0) invert(1);opacity:.9;}
+
+    /* Hero card mockup */
+    .hero-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;}
+    .hero-card-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+    .hero-stat{background:#f0f9ff;border-radius:8px;padding:10px 8px;text-align:center;}
+    .hero-stat .label{font-size:10px;color:#64748b;margin-bottom:2px;}
+    .hero-stat .value{font-size:16px;font-weight:800;color:#0EA5E9;}
+    .hero-map-mock{background:#e8f4fd;border-radius:10px;height:180px;position:relative;overflow:hidden;}
+    .hero-map-mock img{width:100%;height:100%;object-fit:cover;}
+    .map-pins{position:absolute;inset:0;padding:10px;}
+    .map-pin{position:absolute;display:flex;align-items:center;gap:4px;}
+    .pin-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);}
+    .pin-label{background:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;color:#1e293b;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+    .route-line{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+    .hero-card-spots{margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+    .hero-spot-row{display:flex;align-items:center;gap:8px;font-size:12px;padding:6px 8px;background:#f8fafc;border-radius:6px;}
+    .hero-spot-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
+    .hero-spot-name{flex:1;font-weight:600;color:#374151;}
+    .hero-spot-time{color:#64748b;font-size:11px;}
+    @media(max-width:900px){
+      .hero-inner{grid-template-columns:1fr;}
+      .hero-card{display:none;}
+    }
+
+    /* Section commons */
+    .section{padding:72px 24px;}
+    .section-inner{max-width:1200px;margin:0 auto;}
+    .section-label{font-size:13px;font-weight:700;color:#0EA5E9;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+    .section-title{font-size:clamp(22px,3.5vw,36px);font-weight:800;color:#0f172a;margin-bottom:12px;line-height:1.25;}
+    .section-sub{font-size:15px;color:#64748b;margin-bottom:48px;}
+
+    /* Pain points */
+    .pain-section{background:#f0f9ff;}
+    .pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+    .pain-card{border-radius:14px;overflow:hidden;position:relative;min-height:200px;box-shadow:0 4px 16px rgba(0,0,0,.12);}
+    .pain-card img{width:100%;height:100%;object-fit:cover;display:block;}
+    .pain-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,32,71,.85) 50%,rgba(2,32,71,.1));}
+    .pain-card-body{position:absolute;bottom:0;left:0;right:0;padding:20px;}
+    .pain-icon{width:36px;height:36px;margin-bottom:8px;}
+    .pain-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .pain-card p{font-size:13px;color:#bae6fd;line-height:1.5;}
+    @media(max-width:600px){.pain-grid{grid-template-columns:1fr;}}
+
+    /* Features */
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .feat-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;transition:box-shadow .2s,transform .2s;}
+    .feat-card:hover{box-shadow:0 8px 24px rgba(14,165,233,.12);transform:translateY(-2px);}
+    .feat-icon{width:52px;height:52px;margin-bottom:14px;}
+    .feat-card h3{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;}
+    .feat-card p{font-size:13px;color:#64748b;line-height:1.6;}
+    @media(max-width:900px){.feat-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:600px){.feat-grid{grid-template-columns:1fr;}}
+
+    /* Steps */
+    .steps-section{background:#0EA5E9;}
+    .steps-section .section-title{color:#fff;}
+    .steps-section .section-label{color:#bae6fd;}
+    .steps-section .section-sub{color:#e0f2fe;}
+    .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+    .step-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:24px;text-align:center;backdrop-filter:blur(8px);}
+    .step-num{width:48px;height:48px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#0EA5E9;margin:0 auto 14px;}
+    .step-icon{width:48px;height:48px;margin:0 auto 10px;}
+    .step-card h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .step-card p{font-size:12px;color:#bae6fd;line-height:1.5;}
+    @media(max-width:900px){.steps-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:480px){.steps-grid{grid-template-columns:1fr;}}
+
+    /* Comparison */
+    .cmp-table{width:100%;border-collapse:collapse;font-size:14px;box-shadow:0 4px 20px rgba(0,0,0,.08);border-radius:14px;overflow:hidden;}
+    .cmp-table th,.cmp-table td{padding:14px 18px;text-align:center;border-bottom:1px solid #e2e8f0;}
+    .cmp-table th{background:#0EA5E9;color:#fff;font-weight:700;font-size:13px;}
+    .cmp-table th:first-child,.cmp-table td:first-child{text-align:left;font-weight:600;color:#374151;}
+    .cmp-table tr:last-child td{border-bottom:none;}
+    .cmp-table tr:nth-child(even) td{background:#f8fafc;}
+    .cmp-col-main{background:#f0f9ff !important;font-weight:700;}
+    .cmp-yes{color:#10B981;font-weight:700;font-size:16px;}
+    .cmp-no{color:#ef4444;font-size:16px;}
+    .cmp-half{color:#f59e0b;font-size:14px;}
+    .cmp-th-main{background:#0284c7 !important;}
+
+    /* UI Preview */
+    .preview-section{background:#f8fafc;}
+    .preview-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+    .preview-img{border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.15);}
+    .preview-img img{width:100%;display:block;}
+    .preview-points{display:flex;flex-direction:column;gap:20px;}
+    .preview-point{display:flex;gap:14px;align-items:flex-start;}
+    .preview-point-icon{width:44px;height:44px;background:#f0f9ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .preview-point-icon img{width:28px;height:28px;}
+    .preview-point h3{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:4px;}
+    .preview-point p{font-size:13px;color:#64748b;line-height:1.6;}
+    @media(max-width:768px){.preview-inner{grid-template-columns:1fr;}}
+
+    /* Trust */
+    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+    .trust-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;text-align:center;}
+    .trust-card img{width:48px;height:48px;margin:0 auto 12px;}
+    .trust-card h3{font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px;}
+    .trust-card p{font-size:12px;color:#64748b;}
+    @media(max-width:768px){.trust-grid{grid-template-columns:repeat(2,1fr);}}
+
+    /* Bottom CTA */
+    .cta-section{background:linear-gradient(135deg,#0EA5E9,#0284c7);padding:80px 24px;text-align:center;}
+    .cta-section h2{font-size:clamp(24px,4vw,40px);font-weight:800;color:#fff;margin-bottom:12px;}
+    .cta-section p{font-size:16px;color:#bae6fd;margin-bottom:36px;}
+    .cta-big-btn{display:inline-flex;align-items:center;gap:12px;background:#F97316;color:#fff;padding:20px 48px;border-radius:14px;font-size:20px;font-weight:800;box-shadow:0 8px 24px rgba(249,115,22,.4);transition:transform .2s,opacity .2s;}
+    .cta-big-btn:hover{transform:translateY(-3px);opacity:.95;}
+    .cta-note{margin-top:16px;color:#bae6fd;font-size:13px;}
+
+    /* Footer */
+    .lp-footer{background:#0f172a;color:#94a3b8;padding:32px 24px;text-align:center;font-size:13px;}
+    .lp-footer a{color:#7dd3fc;}
+    .lp-footer .footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px;flex-wrap:wrap;}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- Header -->
+<header class="lp-header">
+  <div class="lp-header-inner">
+    <a href="/sightseeing-route-planner/lp/" class="lp-logo">
+      <img src="../assets/icons/split/01-01.png" alt="">
+      <span>観光ルート最適化ツール</span>
+    </a>
+    <nav class="lp-nav">
+      <a href="#features">特徴</a>
+      <a href="#steps">使い方</a>
+      <a href="#comparison">他サービス比較</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <a href="/sightseeing-route-planner/" class="lp-cta-btn">ルートを最適化する →</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="sub">観光スポットの最短ルートを</p>
+      <h1>無料自動作成<br>移動時間・交通費も計算</h1>
+      <p class="desc">スポットを入力するだけで最短ルートを自動生成。<br>登録不要で今すぐ使えます。</p>
+      <div class="hero-badges">
+        <span class="badge-free">✓ 完全無料</span>
+        <span class="badge-noreg">✓ 登録不要</span>
+      </div>
+      <a href="/sightseeing-route-planner/" class="hero-cta">
+        ルートを最適化する
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <div class="hero-transports">
+        <div class="hero-transport-item">
+          <img src="../assets/icons/split/01-06.png" alt="">徒歩
+        </div>
+        <div class="hero-transport-item">
+          <img src="../assets/icons/split/01-05.png" alt="">電車
+        </div>
+        <div class="hero-transport-item">
+          <img src="../assets/icons/split/01-07.png" alt="">車
+        </div>
+      </div>
+    </div>
+
+    <!-- UI Mock Card -->
+    <div class="hero-card">
+      <div class="hero-card-stats">
+        <div class="hero-stat"><div class="label">移動時間</div><div class="value">5h42m</div></div>
+        <div class="hero-stat"><div class="label">総所要時間</div><div class="value">1h38m</div></div>
+        <div class="hero-stat"><div class="label">交通費</div><div class="value">¥1,280</div></div>
+      </div>
+      <div class="hero-map-mock">
+        <img src="../assets/photos/photo_02.jpg" alt="ルートマップ" style="width:100%;height:100%;object-fit:cover;opacity:.7;">
+        <div style="position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:28px;">
+          <div class="map-pin"><div class="pin-dot" style="background:#ef4444;">A</div><div class="pin-label">京都駅</div></div>
+          <div class="map-pin"><div class="pin-dot" style="background:#f59e0b;">B</div><div class="pin-label">伏見稲荷</div></div>
+          <div class="map-pin"><div class="pin-dot" style="background:#10B981;">C</div><div class="pin-label">清水寺</div></div>
+        </div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 300 180" preserveAspectRatio="none">
+          <path d="M40,30 Q80,80 60,110 Q40,140 70,160" stroke="#0EA5E9" stroke-width="2.5" fill="none" stroke-dasharray="6 3" opacity=".8"/>
+        </svg>
+      </div>
+      <div class="hero-card-spots">
+        <div class="hero-spot-row">
+          <div class="hero-spot-num" style="background:#ef4444;">1</div>
+          <div class="hero-spot-name">京都駅</div>
+          <div class="hero-spot-time">60分</div>
+        </div>
+        <div class="hero-spot-row">
+          <div class="hero-spot-num" style="background:#f59e0b;">2</div>
+          <div class="hero-spot-name">伏見稲荷大社</div>
+          <div class="hero-spot-time">90分</div>
+        </div>
+        <div class="hero-spot-row">
+          <div class="hero-spot-num" style="background:#10B981;">3</div>
+          <div class="hero-spot-name">清水寺</div>
+          <div class="hero-spot-time">60分</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pain Points -->
+<section class="section pain-section" id="pain">
+  <div class="section-inner">
+    <div class="section-label">こんなお悩みありませんか？</div>
+    <h2 class="section-title">観光プラン作成でよくある悩み</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <img src="../assets/photos/photo_03.jpg" alt="ルート作りに時間がかかる">
+        <div class="pain-card-overlay"></div>
+        <div class="pain-card-body">
+          <img class="pain-icon" src="../assets/icons/split/02-01.png" alt="" style="filter:brightness(0) invert(1);">
+          <h3>ルート作りに時間がかかる</h3>
+          <p>何時間もかけてルートを手動で調べるのに<br>結局効率が悪いまま…</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <img src="../assets/photos/photo_04.jpg" alt="移動時間の計算が難しい">
+        <div class="pain-card-overlay"></div>
+        <div class="pain-card-body">
+          <img class="pain-icon" src="../assets/icons/split/01-02.png" alt="" style="filter:brightness(0) invert(1);">
+          <h3>移動時間の計算が難しい</h3>
+          <p>スポット間の移動時間がわからず<br>スケジュールが崩れてしまう…</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <img src="../assets/photos/photo_05.jpg" alt="交通費の把握が難しい">
+        <div class="pain-card-overlay"></div>
+        <div class="pain-card-body">
+          <img class="pain-icon" src="../assets/icons/split/01-08.png" alt="" style="filter:brightness(0) invert(1);">
+          <h3>交通費が事前に把握できない</h3>
+          <p>旅行後に交通費が予算をオーバーして<br>後悔したことがある…</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <img src="../assets/photos/photo_06.jpg" alt="計画を共有しにくい">
+        <div class="pain-card-overlay"></div>
+        <div class="pain-card-body">
+          <img class="pain-icon" src="../assets/icons/split/02-07.png" alt="" style="filter:brightness(0) invert(1);">
+          <h3>計画を仲間と共有しにくい</h3>
+          <p>Excelやメモアプリでは<br>グループへの共有が面倒…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features">
+  <div class="section-inner">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">観光ルート最適化ツールの特徴</h2>
+    <p class="section-sub">競合ツールにはない差別化機能が揃っています</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <img class="feat-icon" src="../assets/icons/split/01-03.png" alt="">
+        <h3>リアルタイム地図でルート確認</h3>
+        <p>Googleマップ連携でルートを地図上にリアルタイム表示。スポット間の距離感が一目でわかります。</p>
+      </div>
+      <div class="feat-card">
+        <img class="feat-icon" src="../assets/icons/split/02-07.png" alt="">
+        <h3>PDF・URLでかんたんシェア</h3>
+        <p>最適化したルートをPDF出力またはURLでシェア。同行者と計画をすぐに共有できます。</p>
+      </div>
+      <div class="feat-card">
+        <img class="feat-icon" src="../assets/icons/split/01-08.png" alt="">
+        <h3>移動時間・交通費を自動計算</h3>
+        <p>徒歩/電車/車を切り替えて移動時間と交通費を即計算。予算オーバーを事前に防げます。</p>
+      </div>
+      <div class="feat-card">
+        <img class="feat-icon" src="../assets/icons/split/03-06.png" alt="">
+        <h3>登録不要で今すぐ使える</h3>
+        <p>アカウント作成不要。ブラウザを開いてすぐに使えます。AIアプリのような面倒な設定は一切なし。</p>
+      </div>
+      <div class="feat-card">
+        <img class="feat-icon" src="../assets/icons/split/02-02.png" alt="">
+        <h3>日帰り/1泊2日レコメンド</h3>
+        <p>滞在時間の配分を自動でレコメンド。旅行初心者でもプロ級のスケジュールが作れます。</p>
+      </div>
+      <div class="feat-card">
+        <img class="feat-icon" src="../assets/icons/split/02-08.png" alt="">
+        <h3>スマホ最適化UI</h3>
+        <p>旅先でのスマホ操作に最適化。大きなタップエリアとステップ表示でストレスなく入力できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="section steps-section" id="steps">
+  <div class="section-inner">
+    <div class="section-label" style="color:#bae6fd;">How to use</div>
+    <h2 class="section-title">使い方はとっても簡単！4ステップ</h2>
+    <p class="section-sub">スポットを入力するだけで最短ルートを自動作成</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <img class="step-icon" src="../assets/icons/split/01-01.png" alt="" style="filter:brightness(0) invert(1);">
+        <h3>スポットを入力</h3>
+        <p>行きたい観光スポットの名前と滞在時間を入力します（最大10個）</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <img class="step-icon" src="../assets/icons/split/03-03.png" alt="" style="filter:brightness(0) invert(1);">
+        <h3>条件を設定</h3>
+        <p>交通手段（徒歩・電車・車）と出発時刻を選択します</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <img class="step-icon" src="../assets/icons/split/01-02.png" alt="" style="filter:brightness(0) invert(1);">
+        <h3>ルートを自動作成</h3>
+        <p>ボタン1クリックで最短ルートと移動時間・交通費が即時表示</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <img class="step-icon" src="../assets/icons/split/02-07.png" alt="" style="filter:brightness(0) invert(1);">
+        <h3>シェア・保存</h3>
+        <p>URLコピーまたはPDFでルートを保存。同行者にすぐ共有できます</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="section" id="comparison">
+  <div class="section-inner">
+    <div class="section-label">Comparison</div>
+    <h2 class="section-title">他サービスとの違い</h2>
+    <p class="section-sub">競合ルートメーカーにはない機能が揃っています</p>
+    <div style="overflow-x:auto;">
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;">機能</th>
+          <th class="cmp-th-main">✨ 本ツール</th>
+          <th>ルートメーカー</th>
+          <th>NAVITIME</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>完全無料</td>
+          <td class="cmp-col-main"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-half">△ 一部有料</span></td>
+          <td><span class="cmp-no">✗ 有料プランあり</span></td>
+        </tr>
+        <tr>
+          <td>登録不要</td>
+          <td class="cmp-col-main"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-half">△ 一部必要</span></td>
+          <td><span class="cmp-no">✗ 要登録</span></td>
+        </tr>
+        <tr>
+          <td>交通費自動計算</td>
+          <td class="cmp-col-main"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-half">△ 限定的</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>複数交通手段切替</td>
+          <td class="cmp-col-main"><span class="cmp-yes">✓ 徒歩/電車/車</span></td>
+          <td><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>予算シミュレーション</td>
+          <td class="cmp-col-main"><span class="cmp-yes">✓ 目標設定付き</span></td>
+          <td><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-no">✗</span></td>
+        </tr>
+        <tr>
+          <td>URLシェア</td>
+          <td class="cmp-col-main"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-half">△</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>旅行初心者向けレコメンド</td>
+          <td class="cmp-col-main"><span class="cmp-yes">✓ 日帰り/1泊2日</span></td>
+          <td><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-no">✗</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- UI Preview -->
+<section class="section preview-section">
+  <div class="section-inner">
+    <div class="section-label">Preview</div>
+    <h2 class="section-title">使いやすいUIでスムーズにプランニング</h2>
+    <div class="preview-inner">
+      <div class="preview-img">
+        <img src="../assets/photos/photo_02.jpg" alt="ツールのUI画面" style="border-radius:16px;">
+      </div>
+      <div class="preview-points">
+        <div class="preview-point">
+          <div class="preview-point-icon"><img src="../assets/icons/split/01-04.png" alt=""></div>
+          <div>
+            <h3>ドラッグ&ドロップでスポット並び替え</h3>
+            <p>直感的な操作でスポットの順番を変更可能。最適なルート順を自分でカスタマイズできます。</p>
+          </div>
+        </div>
+        <div class="preview-point">
+          <div class="preview-point-icon"><img src="../assets/icons/split/02-01.png" alt=""></div>
+          <div>
+            <h3>リアルタイムで時間・費用を更新</h3>
+            <p>スポットを追加・変更するたびに移動時間と交通費が即座に再計算されます。</p>
+          </div>
+        </div>
+        <div class="preview-point">
+          <div class="preview-point-icon"><img src="../assets/icons/split/02-08.png" alt=""></div>
+          <div>
+            <h3>スマホでも快適に操作</h3>
+            <p>旅先でのスマホ入力を想定した大きなタップエリアとわかりやすいステップ表示を採用。</p>
+          </div>
+        </div>
+        <div class="preview-point">
+          <div class="preview-point-icon"><img src="../assets/icons/split/02-07.png" alt=""></div>
+          <div>
+            <h3>結果をSNSでかんたん共有</h3>
+            <p>LINE・Xへのシェアボタンが結果画面に表示。同行者へのルート共有が数秒で完了します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">安心・安全</div>
+    <h2 class="section-title">安心してご利用いただけます</h2>
+    <p class="section-sub">プライバシーとセキュリティを最優先に設計</p>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <img src="../assets/icons/split/01-08.png" alt="">
+        <h3>完全無料</h3>
+        <p>すべての機能を永久無料でご利用いただけます。隠れた課金は一切ありません。</p>
+      </div>
+      <div class="trust-card">
+        <img src="../assets/icons/split/03-05.png" alt="">
+        <h3>登録不要</h3>
+        <p>アカウント作成・メール登録は不要。ブラウザからすぐに使い始められます。</p>
+      </div>
+      <div class="trust-card">
+        <img src="../assets/icons/split/03-06.png" alt="">
+        <h3>プライバシー保護</h3>
+        <p>入力データはブラウザ内で処理。外部サーバーへの送信は一切ありません。</p>
+      </div>
+      <div class="trust-card">
+        <img src="../assets/icons/split/03-07.png" alt="">
+        <h3>データ保持</h3>
+        <p>入力したスポット情報はブラウザに自動保存。次回アクセス時も引き続き利用可能。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:#f8fafc;">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくある質問</h2>
+    <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
+      <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;">
+        <summary style="font-weight:700;font-size:15px;color:#0f172a;cursor:pointer;list-style:none;">Q. 利用料金はかかりますか？</summary>
+        <p style="margin-top:12px;font-size:14px;color:#64748b;line-height:1.7;">A. 完全無料です。すべての機能を登録なしで永久無料でご利用いただけます。隠れた課金は一切ありません。</p>
+      </details>
+      <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;">
+        <summary style="font-weight:700;font-size:15px;color:#0f172a;cursor:pointer;list-style:none;">Q. スマートフォンでも使えますか？</summary>
+        <p style="margin-top:12px;font-size:14px;color:#64748b;line-height:1.7;">A. はい、スマートフォン・タブレット・PCすべてに対応しています。旅先でのスマホ入力に最適化したUIを採用しています。</p>
+      </details>
+      <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;">
+        <summary style="font-weight:700;font-size:15px;color:#0f172a;cursor:pointer;list-style:none;">Q. 入力したデータはどこに保存されますか？</summary>
+        <p style="margin-top:12px;font-size:14px;color:#64748b;line-height:1.7;">A. 入力データはすべてお使いのブラウザ（localStorage）に保存されます。外部サーバーへの送信は行いません。</p>
+      </details>
+      <details style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;">
+        <summary style="font-weight:700;font-size:15px;color:#0f172a;cursor:pointer;list-style:none;">Q. 海外の観光地にも対応していますか？</summary>
+        <p style="margin-top:12px;font-size:14px;color:#64748b;line-height:1.7;">A. はい、スポット名を入力するだけで国内外どちらの観光地でもご利用いただけます。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="cta-section">
+  <h2>今すぐ無料でルートを最適化する</h2>
+  <p>登録不要・完全無料。スポットを入力するだけで最短ルートが完成します。</p>
+  <a href="/sightseeing-route-planner/" class="cta-big-btn">
+    ルートを最適化する
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+  <p class="cta-note">✓ 完全無料 &nbsp;|&nbsp; ✓ 登録不要 &nbsp;|&nbsp; ✓ プライバシー保護</p>
+</section>
+
+<footer class="lp-footer">
+  <div class="footer-links">
+    <a href="/sightseeing-route-planner/">ツールを使う</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/terms.html">利用規約</a>
+    <a href="/contact.html">お問い合わせ</a>
+  </div>
+  <p>© 2026 AppADayCreator. All rights reserved. | 本サービスはアフィリエイト広告を掲載しています</p>
+</footer>
+</body>
+</html>
